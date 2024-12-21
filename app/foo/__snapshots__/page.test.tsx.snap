@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`foo page should render 1`] = `
+<div>
+  <h2>
+    This is Foo page.
+  </h2>
+</div>
+`;
