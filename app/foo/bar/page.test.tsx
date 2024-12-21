@@ -8,7 +8,7 @@ const mockUsePathname = usePathname as jest.Mock;
 
 describe("bar page", () => {
   beforeAll(() => {
-    mockUsePathname.mockReturnValue("mockURL/");
+    mockUsePathname.mockReturnValue("mockURL");
   });
 
   it("should render", () => {

@@ -10,14 +10,14 @@ const BarPage = () => {
     <>
       <h2>This is Bar page.</h2>
       <Link
-        href={`${pathname}hello`}
+        href={`${pathname}/hello`}
         style={{ color: "red", textDecoration: "underline" }}
       >
         to [slug] page
       </Link>
       <br />
       <Link
-        href={`${pathname}..`}
+        href={`${pathname}/..`}
         style={{ color: "red", textDecoration: "underline" }}
       >
         return to one level above page

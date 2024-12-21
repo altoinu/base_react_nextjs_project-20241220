@@ -10,7 +10,7 @@ const FooPage = () => {
     <>
       <h2>This is Foo page.</h2>
       <Link
-        href={`${pathname}bar`}
+        href={`${pathname}/bar`}
         style={{ color: "red", textDecoration: "underline" }}
       >
         to Bar page
