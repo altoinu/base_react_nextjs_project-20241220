@@ -1,5 +1,29 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 const BarPage = () => {
-  return <h2>This is Bar page.</h2>;
+  const pathname = usePathname();
+
+  return (
+    <>
+      <h2>This is Bar page.</h2>
+      <Link
+        href={`${pathname}hello`}
+        style={{ color: "red", textDecoration: "underline" }}
+      >
+        to [slug] page
+      </Link>
+      <br />
+      <Link
+        href={`${pathname}..`}
+        style={{ color: "red", textDecoration: "underline" }}
+      >
+        return to one level above page
+      </Link>
+    </>
+  );
 };
 
 export default BarPage;

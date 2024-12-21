@@ -1,7 +1,16 @@
 import Page from "./page";
 import { render, screen } from "@testing-library/react";
+import { usePathname } from "next/navigation";
+
+jest.mock("next/navigation");
+
+const mockUsePathname = usePathname as jest.Mock;
 
 describe("bar page", () => {
+  beforeAll(() => {
+    mockUsePathname.mockReturnValue("mockURL/");
+  });
+
   it("should render", () => {
     const { container: PageContainer } = render(<Page />);
 

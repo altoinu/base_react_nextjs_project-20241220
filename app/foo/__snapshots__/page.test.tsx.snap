@@ -5,5 +5,11 @@ exports[`foo page should render 1`] = `
   <h2>
     This is Foo page.
   </h2>
+  <a
+    href="mockURL/bar"
+    style="color: red; text-decoration: underline;"
+  >
+    to Bar page
+  </a>
 </div>
 `;
