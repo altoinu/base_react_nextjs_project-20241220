@@ -9,6 +9,7 @@ const FooPage = () => {
   return (
     <>
       <h2>This is Foo page.</h2>
+      <p>Pathname: {pathname}</p>
       <Link
         href={`${pathname}/bar`}
         style={{ color: "red", textDecoration: "underline" }}

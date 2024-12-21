@@ -5,15 +5,19 @@ exports[`bar page should render 1`] = `
   <h2>
     This is Bar page.
   </h2>
+  <p>
+    Pathname: 
+    /mockURL
+  </p>
   <a
-    href="mockURL/hello"
+    href="/mockURL/hello"
     style="color: red; text-decoration: underline;"
   >
     to [slug] page
   </a>
   <br />
   <a
-    href="mockURL/.."
+    href="/mockURL/.."
     style="color: red; text-decoration: underline;"
   >
     return to one level above page
