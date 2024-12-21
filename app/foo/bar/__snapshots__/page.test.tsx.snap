@@ -10,17 +10,26 @@ exports[`bar page should render 1`] = `
     /mockURL
   </p>
   <a
-    href="/mockURL/hello"
-    style="color: red; text-decoration: underline;"
-  >
-    to [slug] page
-  </a>
-  <br />
-  <a
     href="/mockURL/.."
     style="color: red; text-decoration: underline;"
   >
     return to one level above page
   </a>
+  <br />
+  <a
+    href="/mockURL/async/hello"
+    style="color: red; text-decoration: underline;"
+  >
+    to asynchronous [slug] page
+  </a>
+  <br />
+  <br />
+  <a
+    href="/mockURL/sync/hello"
+    style="color: red; text-decoration: underline;"
+  >
+    to synchronous [slug] page
+  </a>
+  <br />
 </div>
 `;
