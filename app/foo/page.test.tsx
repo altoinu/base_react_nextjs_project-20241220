@@ -12,9 +12,9 @@ describe("foo page", () => {
   });
 
   it("should render", () => {
-    const { container: PageContainer } = render(<Page />);
+    const { container: pageContainer } = render(<Page />);
 
-    expect(PageContainer).toMatchSnapshot();
+    expect(pageContainer).toMatchSnapshot();
   });
 
   it("should render a heading", () => {
