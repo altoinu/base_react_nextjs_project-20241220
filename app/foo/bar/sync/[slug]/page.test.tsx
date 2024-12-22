@@ -3,7 +3,7 @@ import { act, render, screen } from "@testing-library/react";
 
 describe("slug page", () => {
   it("should render", async () => {
-    const { container: PageContainer } = await act(async () => {
+    const { container: pageContainer } = await act(async () => {
       return render(
         <Page
           params={Promise.resolve({
@@ -13,7 +13,7 @@ describe("slug page", () => {
       );
     });
 
-    expect(PageContainer).toMatchSnapshot();
+    expect(pageContainer).toMatchSnapshot();
   });
 
   it("should render a heading", async () => {
