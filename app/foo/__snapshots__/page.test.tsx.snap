@@ -9,6 +9,9 @@ exports[`foo page should render 1`] = `
     Pathname: 
     /mockURL
   </p>
+  <br />
+  <br />
+  <br />
   <a
     href="/mockURL/bar"
     style="color: red; text-decoration: underline;"
