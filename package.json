@@ -1,6 +1,7 @@
 {
   "name": "base_react_nextjs_project-20241220",
   "version": "0.1.0",
+  "description": "Sample basic React Next.js project setup with some dev dependencies",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -13,6 +14,16 @@
     "test:watch": "jest --watch",
     "prepare": "husky install"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/altoinu/base_react_nextjs_project-20241220.git"
+  },
+  "author": "Kaoru Kawashima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/altoinu/base_react_nextjs_project-20241220/issues"
+  },
+  "homepage": "https://github.com/altoinu/base_react_nextjs_project-20241220#readme",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
