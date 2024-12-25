@@ -4,6 +4,10 @@ Sample basic React Next.js project setup with some dev dependencies
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Node stuff
+
+- Node.js (v23.4.0) and npm [https://nodejs.org/](https://nodejs.org/)
+
 ## Getting Started
 
 First, run the development server:
