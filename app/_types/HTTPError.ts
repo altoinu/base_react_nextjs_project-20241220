@@ -1,4 +1,4 @@
-export class HTTPError extends Error {
+export default class HTTPError extends Error {
   method: string;
   url: string;
   status: number;

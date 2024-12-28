@@ -1,6 +1,6 @@
 "use client";
 
-import { HTTPError } from "../_types/HTTPError";
+import HTTPError from "../_types/HTTPError";
 import { useCallback, useState } from "react";
 
 /** Union type of supported HTTP method strings */
