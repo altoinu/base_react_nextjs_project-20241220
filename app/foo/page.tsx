@@ -4,11 +4,12 @@ import HelloBoxComponent from "../_components/HelloBoxComponent";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const FooPage = () => {
+export default function FooPage() {
   const pathname = usePathname();
 
-  const handleButtonClick = (buttonNum: number) =>
+  function handleButtonClick(buttonNum: number) {
     alert("button number clicked:" + buttonNum);
+  }
 
   return (
     <>
@@ -31,6 +32,4 @@ const FooPage = () => {
       </Link>
     </>
   );
-};
-
-export default FooPage;
+}

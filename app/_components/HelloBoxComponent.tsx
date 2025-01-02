@@ -14,11 +14,11 @@ type HomePageProps = {
   onButtonClick?: (buttonNum: number) => void;
 };
 
-const HelloBoxComponent = ({
+export default function HelloBoxComponent({
   personName,
   onButtonClick,
   ...props
-}: HomePageProps) => {
+}: HomePageProps) {
   const [clickedButtonResponse, setClickedButtonResponse] = useState<string>();
 
   const handleButtonClick = (buttonNum: number) => {
@@ -55,6 +55,4 @@ const HelloBoxComponent = ({
       )}
     </>
   );
-};
-
-export default HelloBoxComponent;
+}
