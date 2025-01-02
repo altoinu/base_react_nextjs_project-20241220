@@ -36,7 +36,6 @@ export default function BarPage() {
           </Link>
         </li>
       </ul>
-      <br />
     </>
   );
 }

@@ -2,6 +2,8 @@ import HTTPError from "../_types/HTTPError";
 import useFetch from "./useFetch";
 import { act, renderHook } from "@testing-library/react";
 
+const TEST_URL = "https://www.example.com/test/";
+
 // cache actual console.error
 const cachedConsoleError = console.error;
 
@@ -14,8 +16,6 @@ function turnConsoleErrorsOff() {
 function turnConsoleErrorsOn() {
   console.error = cachedConsoleError;
 }
-
-const TEST_URL = "https://www.example.com/test/";
 
 function mockNetwork(url: string, method: string) {
   return fetchMock.mockIf((req) => req.url === url && req.method === method);
@@ -245,7 +245,6 @@ describe("useFetch", () => {
 
   it("throws an error when bad data is returned (ex. bad JSON format)", async () => {
     mockNetwork(TEST_URL, "GET");
-    //const mockResponseJSON = { foo: "bar" };
     const mockResponseBody = `{"foo": bar}`; // note: bar not in quotes
     fetchMock.mockResponseOnce(mockResponseBody, {
       headers: {

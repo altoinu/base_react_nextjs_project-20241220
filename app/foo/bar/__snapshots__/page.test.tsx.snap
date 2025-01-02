@@ -35,6 +35,5 @@ exports[`bar page should render 1`] = `
       </a>
     </li>
   </ul>
-  <br />
 </div>
 `;
