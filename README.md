@@ -6,7 +6,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Node stuff
 
-- Node.js (v23.4.0) and npm [https://nodejs.org/](https://nodejs.org/)
+- Node.js (v23.5.0) and npm [https://nodejs.org/](https://nodejs.org/)
 
 ## Getting Started
 
