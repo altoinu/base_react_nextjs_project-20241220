@@ -27,6 +27,9 @@ export default function FetchDataComponent() {
       {fetchStatus == FetchStatus.Pending && (
         <Typography variant="body1">Loading config...</Typography>
       )}
+      {fetchStatus == FetchStatus.Failed && (
+        <Typography variant="body1">Error config!!</Typography>
+      )}
       {fetchStatus == FetchStatus.Succeeded && data && isConfigData(data) && (
         <>
           <Typography variant="body1">config.json response:</Typography>
