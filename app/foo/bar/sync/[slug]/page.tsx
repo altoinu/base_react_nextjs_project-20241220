@@ -11,9 +11,7 @@ type Props = {
   params: Params;
 };
 
-const SlugPage = ({ params }: Props) => {
+export default function SyncSlugPage({ params }: Props) {
   const { slug } = use(params);
   return <h3>Slug: {slug}</h3>;
-};
-
-export default SlugPage;
+}

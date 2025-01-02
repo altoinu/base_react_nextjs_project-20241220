@@ -13,9 +13,7 @@ export async function generateMetadata({ params }: Props) {
   return { title: `Foo Bar page: ${slug}` };
 }
 
-const SlugPage = async ({ params }: Props) => {
+export default async function AsyncSlugPage({ params }: Props) {
   const { slug } = await params;
   return <h3>Slug: {slug}</h3>;
-};
-
-export default SlugPage;
+}
