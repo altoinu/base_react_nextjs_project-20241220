@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const BarPage = () => {
+export default function BarPage() {
   const pathname = usePathname();
 
   return (
@@ -36,9 +36,6 @@ const BarPage = () => {
           </Link>
         </li>
       </ul>
-      <br />
     </>
   );
-};
-
-export default BarPage;
+}

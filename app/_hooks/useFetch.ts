@@ -130,9 +130,12 @@ export default function useFetch({
             console.error(error);
           } else if (error instanceof Error && error.message) {
             console.error(`${method} ${requestUrl}: ${error.message}`);
-          } else {
+          }
+          /*
+          else {
             console.error(`${method} ${requestUrl}`, error);
           }
+          */
 
           setData(null);
           setFetchStatus(FetchStatus.Failed);
