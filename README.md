@@ -2,11 +2,19 @@
 
 Sample basic React Next.js project setup with some dev dependencies
 
+This project does some API calls. Run this back end API server for it to work: [altoinu/base_nodejs_express_project-20241224](https://github.com/altoinu/base_nodejs_express_project-20241224).
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Node stuff
 
 - Node.js (v23.5.0) and npm [https://nodejs.org/](https://nodejs.org/)
+
+## Initial set up
+
+```
+npm install
+```
 
 ## Getting Started
 
