@@ -4,7 +4,7 @@ import HTTPError from "../_types/HTTPError";
 import { useCallback, useState } from "react";
 
 /** Union type of supported HTTP method strings */
-export type HTTPMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
+type HTTPMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
 
 export enum FetchStatus {
   Idle,
@@ -13,7 +13,7 @@ export enum FetchStatus {
   Failed,
 }
 
-export type UseFetchRequest = {
+type UseFetchArgs = {
   /** HTTP request headers */
   headers?: Headers;
   /** HTTP method string */
@@ -22,7 +22,7 @@ export type UseFetchRequest = {
   url: string;
 };
 
-export type FetchOptions = {
+type FetchArgs = {
   /** Request body data */
   body?:
     | string
@@ -41,8 +41,12 @@ export type FetchOptions = {
   url?: string;
 };
 
-export type FetchResponseData = JSON | string | Blob;
-export type FetchResponse = { data: FetchResponseData; response: Response };
+type FetchResponseData = JSON | string | Blob;
+type FetchResponse = {
+  data: FetchResponseData;
+  response: Response;
+};
+
 /**
  * Custom hook that wraps `fetch` and handles all request & response handling.
  *
@@ -58,12 +62,12 @@ export default function useFetch({
   headers,
   method = "GET",
   url,
-}: UseFetchRequest) {
+}: UseFetchArgs) {
   const [data, setData] = useState<FetchResponseData | null>();
+  const [error, setError] = useState<Error | unknown | null>();
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.Idle);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [response, setResponse] = useState<Response | null>();
-  const [error, setError] = useState<Error | null>();
 
   const executeFetch = useCallback(
     async ({
@@ -71,12 +75,12 @@ export default function useFetch({
       headers: newHeaders,
       query,
       url: newUrl,
-    }: FetchOptions = {}) => {
+    }: FetchArgs = {}) => {
       setData(undefined);
+      setError(null);
       setFetchStatus(FetchStatus.Pending);
       setIsFetching(true);
       setResponse(null);
-      setError(null);
 
       return new Promise<FetchResponse>(async (resolve, reject) => {
         // if newHeaders is specified, use that instead for this execute only
@@ -99,7 +103,7 @@ export default function useFetch({
           const response = await fetch(request);
 
           if (!response.ok) {
-            throw new HTTPError(method, requestUrl, response.status);
+            throw new HTTPError(method, requestUrl, response.status, response);
           }
 
           let responseData = null;
@@ -122,25 +126,25 @@ export default function useFetch({
           }
 
           setData(responseData);
+          setError(null);
           setFetchStatus(FetchStatus.Succeeded);
           setIsFetching(false);
           setResponse(response);
-          setError(null);
 
           resolve({ data: responseData, response });
         } catch (error: unknown) {
           setData(null);
+          setError(error);
           setFetchStatus(FetchStatus.Failed);
           setIsFetching(false);
-          setResponse(null);
 
           if (error instanceof Error) {
-            setError(error);
-
             if (error instanceof HTTPError) {
               console.error(error);
+              setResponse(error.response);
             } else {
               console.error(`${method} ${requestUrl}: ${error.message}`);
+              setResponse(null);
             }
             /*
             else {
