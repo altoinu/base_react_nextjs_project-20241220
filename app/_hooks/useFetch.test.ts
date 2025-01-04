@@ -1,5 +1,5 @@
 import HTTPError from "../_types/HTTPError";
-import useFetch from "./useFetch";
+import useFetch, { FetchStatus } from "./useFetch";
 import { act, renderHook } from "@testing-library/react";
 
 const TEST_URL = "https://www.example.com/test/";
@@ -165,6 +165,9 @@ describe("useFetch", () => {
         const { data } = await result.current.fetch();
         expect(data).toStrictEqual(mockResponseJSON);
       });
+
+      expect(result.current.data).toStrictEqual(mockResponseJSON);
+      expect(result.current.fetchStatus).toBe(FetchStatus.Succeeded);
     });
 
     it("can handle a text response body", async () => {
@@ -239,6 +242,8 @@ describe("useFetch", () => {
         const { response } = await result.current.fetch();
         expect(response).toHaveProperty("status", 200);
       });
+
+      expect(result.current.fetchStatus).toBe(FetchStatus.Succeeded);
     });
 
     it("throws an HTTP error when a 4** response status is encountered", async () => {
