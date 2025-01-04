@@ -63,6 +63,7 @@ export default function useFetch({
   const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.Idle);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [response, setResponse] = useState<Response | null>();
+  const [error, setError] = useState<Error | null>();
 
   const executeFetch = useCallback(
     async ({
@@ -75,6 +76,7 @@ export default function useFetch({
       setFetchStatus(FetchStatus.Pending);
       setIsFetching(true);
       setResponse(null);
+      setError(null);
 
       return new Promise<FetchResponse>(async (resolve, reject) => {
         // if newHeaders is specified, use that instead for this execute only
@@ -123,24 +125,29 @@ export default function useFetch({
           setFetchStatus(FetchStatus.Succeeded);
           setIsFetching(false);
           setResponse(response);
+          setError(null);
 
           resolve({ data: responseData, response });
         } catch (error: unknown) {
-          if (error instanceof HTTPError) {
-            console.error(error);
-          } else if (error instanceof Error && error.message) {
-            console.error(`${method} ${requestUrl}: ${error.message}`);
-          }
-          /*
-          else {
-            console.error(`${method} ${requestUrl}`, error);
-          }
-          */
-
           setData(null);
           setFetchStatus(FetchStatus.Failed);
           setIsFetching(false);
           setResponse(null);
+
+          if (error instanceof Error) {
+            setError(error);
+
+            if (error instanceof HTTPError) {
+              console.error(error);
+            } else {
+              console.error(`${method} ${requestUrl}: ${error.message}`);
+            }
+            /*
+            else {
+              console.error(`${method} ${requestUrl}`, error);
+            }
+            */
+          }
 
           reject(error);
         }
@@ -155,5 +162,6 @@ export default function useFetch({
     fetchStatus,
     isFetching,
     response,
+    error,
   };
 }

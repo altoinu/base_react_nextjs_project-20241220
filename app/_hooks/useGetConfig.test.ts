@@ -5,7 +5,6 @@ import { act, renderHook } from "@testing-library/react";
 const TEST_URL = "http://localhost:4000/";
 
 jest.mock("./useFetch");
-
 const mockUseFetch = useFetch as jest.Mock;
 
 describe("useGetConfig", () => {
