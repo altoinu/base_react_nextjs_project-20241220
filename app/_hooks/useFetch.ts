@@ -41,7 +41,7 @@ type FetchArgs = {
   url?: string;
 };
 
-type FetchResponseData = JSON | string | Blob;
+export type FetchResponseData = JSON | string | Blob;
 type FetchResponse = {
   data: FetchResponseData;
   response: Response;
