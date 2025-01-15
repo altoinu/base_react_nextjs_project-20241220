@@ -3,7 +3,6 @@
 import { FetchStatus } from "../_hooks/useFetch";
 import useGetConfig from "../_hooks/useGetConfig";
 import { isConfigData } from "../_types/ConfigData";
-import { Divider, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 
 export default function FetchDataComponent() {
@@ -22,20 +21,16 @@ export default function FetchDataComponent() {
   }, [data]);
 
   return (
-    <Stack direction="column" sx={{ mt: 4 }}>
-      <Divider />
-      {fetchStatus == FetchStatus.Pending && (
-        <Typography variant="body1">Loading config...</Typography>
-      )}
-      {fetchStatus == FetchStatus.Failed && (
-        <Typography variant="body1">Error config!!</Typography>
-      )}
+    <div className="flex flex-col">
+      <hr />
+      {fetchStatus == FetchStatus.Pending && <span>Loading config...</span>}
+      {fetchStatus == FetchStatus.Failed && <span>Error config!!</span>}
       {fetchStatus == FetchStatus.Succeeded && data && isConfigData(data) && (
         <>
-          <Typography variant="body1">config.json response:</Typography>
+          <span>config.json response:</span>
           <pre>{JSON.stringify(data)}</pre>
         </>
       )}
-    </Stack>
+    </div>
   );
 }

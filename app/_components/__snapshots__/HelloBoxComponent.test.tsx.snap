@@ -9,19 +9,15 @@ exports[`<HelloBoxComponent> should render 1`] = `
     !
   </h1>
   <div
-    class="MuiStack-root css-1oxswqj-MuiStack-root"
+    class="flex flex-row"
   >
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1abvrni-MuiButtonBase-root-MuiButton-root"
-      tabindex="0"
-      type="button"
+      class="button"
     >
       Click Me!
     </button>
     <button
-      class="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButton-colorPrimary css-1abvrni-MuiButtonBase-root-MuiButton-root"
-      tabindex="0"
-      type="button"
+      class="button"
     >
       Click Me Too!
     </button>
