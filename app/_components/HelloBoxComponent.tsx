@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Stack } from "@mui/material";
+import styles from "./HelloBoxComponent.module.css";
 import { useState } from "react";
 
 type HomePageProps = {
@@ -41,17 +41,23 @@ export default function HelloBoxComponent({
         {props.secondPersonName ? ` and ${props.secondPersonName}` : ""}!
       </h1>
       {onButtonClick && (
-        <Stack direction="row" gap={1}>
-          <Button variant="contained" onClick={() => handleButtonClick(1)}>
+        <div className="flex flex-row">
+          <button
+            className={styles.button}
+            onClick={() => handleButtonClick(1)}
+          >
             Click Me!
-          </Button>
-          <Button variant="contained" onClick={() => handleButtonClick(2)}>
+          </button>
+          <button
+            className={styles.button}
+            onClick={() => handleButtonClick(2)}
+          >
             Click Me Too!
-          </Button>
-        </Stack>
+          </button>
+        </div>
       )}
       {clickedButtonResponse && (
-        <p>clicked button response: {clickedButtonResponse}</p>
+        <span>clicked button response: {clickedButtonResponse}</span>
       )}
     </>
   );

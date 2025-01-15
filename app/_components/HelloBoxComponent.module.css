@@ -1,0 +1,10 @@
+.button {
+  background-color: revert;
+  background-image: revert;
+  border-style: revert;
+  border-width: unset;
+  font-family: revert;
+  font-size: revert;
+  line-height: revert;
+  padding: revert;
+}
