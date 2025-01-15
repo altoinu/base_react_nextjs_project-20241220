@@ -1,15 +1,14 @@
 "use client";
 
 import FetchDataComponent from "../_components/FetchDataComponent";
-import { Stack } from "@mui/material";
 
 export default function FooPageLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <Stack direction="column">
+    <div className="flex flex-col">
       {children}
       <FetchDataComponent />
-    </Stack>
+    </div>
   );
 }
