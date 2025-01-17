@@ -7,7 +7,7 @@ export const getNumberCloseToZero = (value1: number, value2: number) => {
   const absoluteValue2 = Math.abs(value2);
 
   if (absoluteValue1 === absoluteValue2) {
-    return absoluteValue1 >= 0 ? absoluteValue1 : absoluteValue2;
+    return value1 >= value2 ? value1 : value2;
   } else if (absoluteValue1 < absoluteValue2) {
     return value1;
   }

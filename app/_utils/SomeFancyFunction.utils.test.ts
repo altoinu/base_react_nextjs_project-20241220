@@ -12,20 +12,37 @@ describe("SomeFancyFunction utils", () => {
 
 describe("Closest to zero", () => {
   describe("getNumberCloseToZero", () => {
+    it("should return whatever specified value if there is a tie (positive vs positive, negative vs negative", () => {
+      expect(getNumberCloseToZero(100, 100)).toEqual(100);
+      expect(getNumberCloseToZero(-100, -100)).toEqual(-100);
+    });
+
+    it("should return positive value if there is a tie (positive vs negative)", () => {
+      expect(getNumberCloseToZero(100, -100)).toEqual(100);
+    });
+
+    it("should return positive value if there is a tie (negative vs positive)", () => {
+      expect(getNumberCloseToZero(-100, 100)).toEqual(100);
+    });
+
+    it("should return positive number when that is closer to zero than negative number", () => {
+      expect(getNumberCloseToZero(1, -2)).toEqual(1);
+      expect(getNumberCloseToZero(-2, 1)).toEqual(1);
+    });
+
+    it("should return negative number when that is closer to zero than positive number", () => {
+      expect(getNumberCloseToZero(3, -2)).toEqual(-2);
+      expect(getNumberCloseToZero(-2, 3)).toEqual(-2);
+    });
+
     it("should return a number closest to zero when given two positive numbers", () => {
       expect(getNumberCloseToZero(1, 2)).toEqual(1);
+      expect(getNumberCloseToZero(2, 1)).toEqual(1);
     });
 
     it("should return a number closest to zero when given two negative numbers", () => {
       expect(getNumberCloseToZero(-1, -2)).toEqual(-1);
-    });
-
-    it("should return positive value if there is a tie (positive and negative)", () => {
-      expect(getNumberCloseToZero(100, -100)).toEqual(100);
-    });
-
-    it("should return positive value if there is a tie (negative and positive)", () => {
-      expect(getNumberCloseToZero(-100, 100)).toEqual(100);
+      expect(getNumberCloseToZero(-2, -1)).toEqual(-1);
     });
   });
 
