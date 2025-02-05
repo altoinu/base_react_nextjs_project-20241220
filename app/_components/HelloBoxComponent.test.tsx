@@ -1,4 +1,5 @@
 import HelloBoxComponent from "./HelloBoxComponent";
+import { describe, expect, it } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -8,7 +9,7 @@ describe("<HelloBoxComponent>", () => {
       <HelloBoxComponent
         personName="John"
         secondPersonName="Doe"
-        onButtonClick={jest.fn}
+        onButtonClick={jest.fn()}
       />,
     );
 
@@ -32,7 +33,7 @@ describe("<HelloBoxComponent>", () => {
       <HelloBoxComponent
         personName="John"
         secondPersonName="Doe"
-        onButtonClick={jest.fn}
+        onButtonClick={jest.fn()}
       />,
     );
 

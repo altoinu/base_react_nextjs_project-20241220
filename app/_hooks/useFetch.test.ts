@@ -1,5 +1,6 @@
 import HTTPError from "../_types/HTTPError";
 import useFetch, { FetchStatus } from "./useFetch";
+import { describe, expect, it } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
 
 const TEST_URL = "https://www.example.com/test/";
@@ -193,7 +194,7 @@ describe("useFetch", () => {
     });
 
     // TODO: test blob (binary) response body
-    xit("can handle a binary file response body", () => {});
+    it.skip("can handle a binary file response body", () => {});
 
     it("throws an error when bad data is returned (ex. bad JSON format)", async () => {
       mockNetwork(TEST_URL, "GET");
@@ -214,13 +215,7 @@ describe("useFetch", () => {
 
       turnConsoleErrorsOff();
 
-      try {
-        await act(async () => {
-          await result.current.fetch();
-        });
-      } catch (error) {
-        expect(error instanceof Error).toBe(true);
-      }
+      await expect(result.current.fetch()).rejects.toThrow(Error);
 
       turnConsoleErrorsOn();
     });
@@ -259,17 +254,21 @@ describe("useFetch", () => {
 
       turnConsoleErrorsOff();
 
-      try {
-        await act(async () => {
-          await result.current.fetch();
-        });
-      } catch (error) {
-        expect(error instanceof HTTPError).toBe(true);
-
-        if (error instanceof HTTPError) {
-          expect(error.status).toBe(404);
+      // https://github.com/jest-community/eslint-plugin-jest/blob/v28.11.0/docs/rules/no-conditional-expect.md
+      class NoErrorThrownError extends Error {}
+      const getError = async <TError>(call: () => unknown): Promise<TError> => {
+        try {
+          await call();
+          throw new NoErrorThrownError();
+        } catch (error: unknown) {
+          return error as TError;
         }
-      }
+      };
+
+      const error = await getError(async () => result.current.fetch());
+      expect(error).not.toBeInstanceOf(NoErrorThrownError);
+      expect(error).toBeInstanceOf(HTTPError);
+      expect(error).toHaveProperty("status", 404);
 
       turnConsoleErrorsOn();
     });
@@ -287,17 +286,21 @@ describe("useFetch", () => {
 
       turnConsoleErrorsOff();
 
-      try {
-        await act(async () => {
-          await result.current.fetch();
-        });
-      } catch (error) {
-        expect(error instanceof HTTPError).toBe(true);
-
-        if (error instanceof HTTPError) {
-          expect(error.status).toBe(500);
+      // https://github.com/jest-community/eslint-plugin-jest/blob/v28.11.0/docs/rules/no-conditional-expect.md
+      class NoErrorThrownError extends Error {}
+      const getError = async <TError>(call: () => unknown): Promise<TError> => {
+        try {
+          await call();
+          throw new NoErrorThrownError();
+        } catch (error: unknown) {
+          return error as TError;
         }
-      }
+      };
+
+      const error = await getError(async () => result.current.fetch());
+      expect(error).not.toBeInstanceOf(NoErrorThrownError);
+      expect(error).toBeInstanceOf(HTTPError);
+      expect(error).toHaveProperty("status", 500);
 
       turnConsoleErrorsOn();
     });
