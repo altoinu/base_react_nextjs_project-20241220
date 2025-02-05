@@ -1,4 +1,5 @@
 import Page from "./page";
+import { describe, expect, it } from "@jest/globals";
 import { act, render, screen } from "@testing-library/react";
 
 describe("slug page", () => {

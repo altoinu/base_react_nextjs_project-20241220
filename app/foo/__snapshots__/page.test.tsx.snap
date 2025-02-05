@@ -10,7 +10,13 @@ exports[`foo page should render 1`] = `
     /mockURL
   </p>
   <br />
+  <div>
+    Mock HelloBoxComponent
+  </div>
   <br />
+  <div>
+    Mock HelloBoxComponent
+  </div>
   <br />
   <a
     href="/mockURL/bar"

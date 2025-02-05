@@ -1,9 +1,11 @@
 import useFetch from "./useFetch";
 import useGetConfig from "./useGetConfig";
+import { describe, expect, it } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
 
 const TEST_URL = "http://localhost:4000/";
 
+// mock a hook
 jest.mock("./useFetch");
 const mockUseFetch = useFetch as jest.Mock;
 

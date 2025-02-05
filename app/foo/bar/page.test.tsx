@@ -1,16 +1,14 @@
 import Page from "./page";
+import { describe, expect, it } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 import { usePathname } from "next/navigation";
 
+// mock a hook
 jest.mock("next/navigation");
-
 const mockUsePathname = usePathname as jest.Mock;
+mockUsePathname.mockReturnValue("/mockURL");
 
 describe("bar page", () => {
-  beforeAll(() => {
-    mockUsePathname.mockReturnValue("/mockURL");
-  });
-
   it("should render", () => {
     const { container: pageContainer } = render(<Page />);
 

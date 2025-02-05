@@ -1,4 +1,5 @@
 import Page, { generateMetadata } from "./page";
+import { describe, expect, it } from "@jest/globals";
 import { render, screen } from "@testing-library/react";
 
 // https://stackoverflow.com/questions/75729282/testing-an-async-server-component-with-jest-in-next-13/76253176#76253176
