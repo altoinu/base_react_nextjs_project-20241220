@@ -3,7 +3,7 @@
 import styles from "./HelloBoxComponent.module.css";
 import { useState } from "react";
 
-type HomePageProps = {
+export type HelloBoxProps = {
   personName: string;
   secondPersonName?: string;
   /**
@@ -18,7 +18,7 @@ export default function HelloBoxComponent({
   personName,
   onButtonClick,
   ...props
-}: HomePageProps) {
+}: HelloBoxProps) {
   const [clickedButtonResponse, setClickedButtonResponse] = useState<string>();
 
   const handleButtonClick = (buttonNum: number) => {

@@ -1,5 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import eslintConfigPrettier from "eslint-config-prettier";
+import eslintPluginJest from "eslint-plugin-jest";
 import eslintPluginReactHooks from "eslint-plugin-react-hooks";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -19,6 +20,7 @@ const eslintConfig = [
     },
     rules: eslintPluginReactHooks.configs.recommended.rules,
   },
+  eslintPluginJest.configs["flat/recommended"],
   eslintConfigPrettier,
 ];
 

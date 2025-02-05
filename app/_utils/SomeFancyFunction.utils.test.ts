@@ -1,4 +1,5 @@
 import { addNumbers, getNumberCloseToZero } from "./SomeFancyFunction.utils";
+import { describe, expect, it } from "@jest/globals";
 
 describe("SomeFancyFunction utils", () => {
   describe("addNumbers", () => {
