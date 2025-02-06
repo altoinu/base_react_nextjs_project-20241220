@@ -19,13 +19,13 @@ describe("<HelloBoxComponent>", () => {
   it("should have person's name", () => {
     render(<HelloBoxComponent personName="Kaoru" />);
     const heading = screen.getByRole("heading");
-    expect(heading.textContent).toBe("Hello Kaoru!");
+    expect(heading).toHaveTextContent("Hello Kaoru!");
   });
 
   it("should have person and second person's names", () => {
     render(<HelloBoxComponent personName="John" secondPersonName="Doe" />);
     const heading = screen.getByRole("heading");
-    expect(heading.textContent).toBe("Hello John and Doe!");
+    expect(heading).toHaveTextContent("Hello John and Doe!");
   });
 
   it("should have two buttons when onButtonClick is set", () => {

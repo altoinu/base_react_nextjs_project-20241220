@@ -30,6 +30,6 @@ describe("slug page", () => {
     );
 
     const heading = await screen.getByRole("heading");
-    expect(heading.textContent).toBe("Slug: hello!");
+    expect(heading).toHaveTextContent("Slug: hello!");
   });
 });
