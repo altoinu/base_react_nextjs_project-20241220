@@ -49,7 +49,7 @@ describe("foo page", () => {
     render(<Page />);
 
     const heading = screen.getByRole("heading");
-    expect(heading.textContent).toBe("This is Foo page.");
+    expect(heading).toHaveTextContent("This is Foo page.");
 
     const heading2 = screen.getByText("This is Foo page.");
     expect(heading2).toBeInTheDocument();
