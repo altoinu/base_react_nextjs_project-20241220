@@ -18,6 +18,6 @@ describe("bar page", () => {
   it("should render a heading", () => {
     render(<Page />);
     const heading = screen.getByRole("heading");
-    expect(heading.textContent).toBe("This is Bar page.");
+    expect(heading).toHaveTextContent("This is Bar page.");
   });
 });
