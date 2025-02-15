@@ -3,49 +3,13 @@
 import HTTPError from "../_types/HTTPError";
 import { useCallback, useState } from "react";
 
-/** Union type of supported HTTP method strings */
-type HTTPMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
-
-export enum FetchStatus {
-  Idle,
-  Pending,
-  Succeeded,
-  Failed,
-}
-
-type UseFetchArgs = {
-  /** HTTP request headers */
-  headers?: Headers;
-  /** HTTP method string */
-  method?: HTTPMethod;
-  /** Request URL string */
-  url: string;
-};
-
-type FetchArgs = {
-  /** Request body data */
-  body?:
-    | string
-    | ArrayBuffer
-    | DataView
-    | Blob
-    | File
-    | URLSearchParams
-    | FormData
-    | ReadableStream;
-  /** HTTP request headers to be used only for this time */
-  headers?: Headers;
-  /** Query string params to append to the request URL */
-  query?: string | URLSearchParams | string[][] | Record<string, string>;
-  /**  Request URL string to be used only for this time */
-  url?: string;
-};
-
-export type FetchResponseData = JSON | string | Blob;
-type FetchResponse = {
-  data: FetchResponseData;
-  response: Response;
-};
+export var FetchStatus;
+(function (FetchStatus) {
+  FetchStatus[(FetchStatus["Idle"] = 0)] = "Idle";
+  FetchStatus[(FetchStatus["Pending"] = 1)] = "Pending";
+  FetchStatus[(FetchStatus["Succeeded"] = 2)] = "Succeeded";
+  FetchStatus[(FetchStatus["Failed"] = 3)] = "Failed";
+})(FetchStatus || (FetchStatus = {}));
 
 /**
  * Custom hook that wraps `fetch` and handles all request & response handling.
@@ -58,31 +22,22 @@ type FetchResponse = {
  *   - `isFetching`: Boolean; true when the network request is active.
  *   - `response`: The HTTP Response object.
  */
-export default function useFetch({
-  headers,
-  method = "GET",
-  url,
-}: UseFetchArgs) {
-  const [data, setData] = useState<FetchResponseData | null>();
-  const [error, setError] = useState<Error | unknown | null>();
-  const [fetchStatus, setFetchStatus] = useState<FetchStatus>(FetchStatus.Idle);
-  const [isFetching, setIsFetching] = useState<boolean>(false);
-  const [response, setResponse] = useState<Response | null>();
+export default function useFetch({ headers, method = "GET", url }) {
+  const [data, setData] = useState();
+  const [error, setError] = useState();
+  const [fetchStatus, setFetchStatus] = useState(FetchStatus.Idle);
+  const [isFetching, setIsFetching] = useState(false);
+  const [response, setResponse] = useState();
 
   const executeFetch = useCallback(
-    async ({
-      body,
-      headers: newHeaders,
-      query,
-      url: newUrl,
-    }: FetchArgs = {}) => {
+    async ({ body, headers: newHeaders, query, url: newUrl } = {}) => {
       setData(undefined);
       setError(null);
       setFetchStatus(FetchStatus.Pending);
       setIsFetching(true);
       setResponse(null);
 
-      return new Promise<FetchResponse>(async (resolve, reject) => {
+      return new Promise(async (resolve, reject) => {
         // if newHeaders is specified, use that instead for this execute only
         const requestHeaders = newHeaders || headers;
         // if newUrl is specified, use that instead for this execute only
@@ -132,7 +87,7 @@ export default function useFetch({
           setResponse(response);
 
           resolve({ data: responseData, response });
-        } catch (error: unknown) {
+        } catch (error) {
           setData(null);
           setError(error);
           setFetchStatus(FetchStatus.Failed);
