@@ -18,7 +18,7 @@ function turnConsoleErrorsOn() {
   console.error = cachedConsoleError;
 }
 
-function mockNetwork(url: string, method: string) {
+function mockNetwork(url, method) {
   return fetchMock.mockIf((req) => req.url === url && req.method === method);
 }
 
@@ -124,8 +124,8 @@ describe("useFetch", () => {
 
     it("can send a JSON request body", async () => {
       mockNetwork(TEST_URL, "POST");
-      let requestBody: JSON;
-      fetchMock.mockResponseOnce(async (request: Request) => {
+      let requestBody;
+      fetchMock.mockResponseOnce(async (request) => {
         requestBody = await request.json();
         return "";
       });
@@ -256,12 +256,12 @@ describe("useFetch", () => {
 
       // https://github.com/jest-community/eslint-plugin-jest/blob/v28.11.0/docs/rules/no-conditional-expect.md
       class NoErrorThrownError extends Error {}
-      const getError = async <TError>(call: () => unknown): Promise<TError> => {
+      const getError = async (call) => {
         try {
           await call();
           throw new NoErrorThrownError();
-        } catch (error: unknown) {
-          return error as TError;
+        } catch (error) {
+          return error;
         }
       };
 
@@ -288,12 +288,12 @@ describe("useFetch", () => {
 
       // https://github.com/jest-community/eslint-plugin-jest/blob/v28.11.0/docs/rules/no-conditional-expect.md
       class NoErrorThrownError extends Error {}
-      const getError = async <TError>(call: () => unknown): Promise<TError> => {
+      const getError = async (call) => {
         try {
           await call();
           throw new NoErrorThrownError();
-        } catch (error: unknown) {
-          return error as TError;
+        } catch (error) {
+          return error;
         }
       };
 
