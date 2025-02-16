@@ -16,7 +16,7 @@ export default function FetchDataComponent() {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
+      console.log("data update:", data);
     }
   }, [data]);
 
