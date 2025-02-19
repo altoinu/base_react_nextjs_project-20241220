@@ -11,10 +11,32 @@ export default function FetchDataComponent() {
   useEffect(() => {
     if (fetch) {
       fetch();
+
+      /*
+      // async await way to fetch
+      (async () => {
+        try {
+          const value = await fetch();
+          console.log("fetch success!", value);
+        } catch (error) {
+          console.log("fetch error", error);
+        }
+      })();
+      */
+
+      /*
+      // then catch way to fetch
+      fetch().then((value) => {
+        console.log("fetch success!", value);
+      }).catch((error) => {
+        console.log("fetch error", error);
+      });
+      */
     }
   }, [fetch]);
 
   useEffect(() => {
+    // useEffect to catch data change after fetch
     if (data) {
       console.log("data update:", data);
     }
