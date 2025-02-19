@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write \"**/*.{md,css,js,cjs,mjs,ts,cts,mts,jsx,tsx}\"",
+    "prettier": "prettier --write \"**/*.{md,css,js,cjs,mjs,jsx,ts,cts,mts,tsx}\"",
     "lint:fix": "npm-run-all prettier lint",
     "test": "jest",
     "test:watch": "jest --watch",
