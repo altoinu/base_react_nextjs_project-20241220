@@ -31,10 +31,6 @@ export var FetchStatus;
  * @typedef {Object} FetchArgs
  * @memberof module:useFetch
  * @alias module:useFetch.FetchArgs
- * @property {(string|ArrayBuffer|DataView|Blob|File|URLSearchParams|FormData|ReadableStream)} [body] Request body data
- * @property {Headers} [headers] HTTP request headers to be used only for this time
- * @property {(string|URLSearchParams|string[][]|Record<string, string>)} [query] Query string params to append to the request URL
- * @property {string} [url] Request URL string to be used only for this time
  */
 
 /**
@@ -47,29 +43,43 @@ export var FetchStatus;
  * @typedef {Object} FetchResponse
  * @memberof module:useFetch
  * @alias module:useFetch.FetchResponse
- * @property {FetchResponseData} data
- * @property {Response} response
+ * @property {FetchResponseData} data The response body object.
+ * @property {Response} response The HTTP Response object.
+ */
+
+/**
+ * @typedef {Promise<FetchResponse>} FetchPromise
+ * @memberof module:useFetch
+ * @alias module:useFetch.FetchPromise
+ */
+
+/**
+ * @typedef {function(FetchArgs):FetchPromise} FetchMethod
+ * @memberof module:useFetch
+ * @alias module:useFetch.FetchMethod
+ * @async
+ * @param {FetchArgs} options
+ * @returns {FetchPromise}
  */
 
 /**
  * @typedef {Object} UseFetchArgs
  * @memberof module:useFetch
  * @alias module:useFetch.UseFetchArgs
- * @property {Headers} [headers] HTTP request headers
- * @property {HTTPMethod} [method="GET"] HTTP method string
- * @property {string} url Request URL string
  */
 
 /**
  * @typedef {Object} useFetchReturnObject
  * @memberof module:useFetch
  * @alias module:useFetch.useFetchReturnObject
- * @property {function(FetchArgs):Promise<FetchResponse>} fetch
- * @property {(FetchResponseData|null|undefined)} data
- * @property {(Error|unknown)} error
- * @property {FetchStatus} fetchStatus
- * @property {boolean} isFetching
- * @property {(Response|null)} response
+ * @property {FetchMethod} fetch The method that will perform the request and
+ * return a Promise.
+ * @property {(FetchResponseData|null|undefined)} data The response body object
+ * of the most recent request.
+ * @property {(Error|unknown)} error Error object, if error had occurred.
+ * @property {FetchStatus} fetchStatus Current FetchStatus.
+ * @property {boolean} isFetching true when the network request is active.
+ * @property {(Response|null)} response The HTTP Response object.
  */
 
 /**
@@ -77,13 +87,49 @@ export var FetchStatus;
  * @module useFetch
  * @version 1.0.0 2025/02/16
  * @param {UseFetchArgs} options Default request object data.
- * @returns {useFetchReturnObject} An object containing:
- * - fetch: The method that will perform the request & return a Promise.
- * - data: The response body object of the most recent request.
- * - error: Error object, if error had occurred.
- * - fetchStatus: Current FetchStatus.
- * - isFetching: Boolean; true when the network request is active.
- * - response: The HTTP Response object.
+ * @param {Headers} [options.headers] HTTP request headers
+ * @param {HTTPMethod} [options.method="GET"] HTTP method string
+ * @param {string} options.url Request URL string
+ * @returns {useFetchReturnObject} An object containing fetch method and
+ * other fetch operation related data.
+ * @example
+ * const { fetch, data } = useFetch();
+ *
+ * // async await waty to fetch
+ * async function doFetch() {
+ *  try {
+ *    const value = await fetch();
+ *    console.log("fetch success!", value);
+ *  } catch (error) {
+ *    console.log("fetch error", error);
+ *  }
+ * }
+ *
+ * doFetch();
+ *
+ *
+ *
+ * // then catch way to fetch
+ * fetch().then((value) => {
+ *  console.log("fetch success!", value);
+ * }).catch((error) => {
+ *  console.log("fetch error", error);
+ * });
+ *
+ *
+ *
+ * // Fetch via useEffect
+ * useEffect(() => {
+ *  if (fetch) {
+ *    fetch();
+ *  }
+ * }, [fetch]);
+ *
+ * useEffect(() => {
+ *  if (data) {
+ *    console.log("data update:", data);
+ *  }
+ * }, [data]);
  */
 function useFetch({ headers, method = "GET", url }) {
   const [data, setData] = useState();
@@ -92,19 +138,38 @@ function useFetch({ headers, method = "GET", url }) {
   const [isFetching, setIsFetching] = useState(false);
   const [response, setResponse] = useState();
 
+  /**
+   * The method to perform the request & return a Promise.
+   * @memberof module:useFetch
+   * @alias module:useFetch.fetch
+   * @async
+   * @function fetch
+   * @inner
+   * @param {FetchArgs} options
+   * @param {(string|ArrayBuffer|DataView|Blob|File|URLSearchParams|FormData|ReadableStream)} [options.body]
+   * Request body data to be sent with this fetch operation
+   * @param {Headers} [options.headers] HTTP request headers to be used, this time only
+   * @param {(string|URLSearchParams|string[][]|Record<string, string>)} [options.query]
+   * Query string params to append to the request URL
+   * @param {string} [options.url] Request URL to be used, this time only
+   * @returns {FetchPromise}
+   */
   const executeFetch = useCallback(
-    async ({ body, headers: newHeaders, query, url: newUrl } = {}) => {
+    async ({
+      body,
+      headers: overrideHeaders,
+      query,
+      url: overrideUrl,
+    } = {}) => {
       setData(undefined);
       setError(null);
       setFetchStatus(FetchStatus.Pending);
       setIsFetching(true);
       setResponse(null);
 
-      // if newHeaders is specified, use that instead for this execute only
-      const requestHeaders = newHeaders || headers;
-      // if newUrl is specified, use that instead for this execute only
-      let requestUrl = newUrl || url;
-      // Append query string to request URL, if provided.
+      const requestHeaders = overrideHeaders || headers;
+      let requestUrl = overrideUrl || url;
+
       if (query) {
         const queryParams = new URLSearchParams(query);
         requestUrl += `?${queryParams}`;
