@@ -7,9 +7,9 @@ export declare enum FetchStatus {
   Failed = 3,
 }
 
-type HTTPMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
+export type HTTPMethod = "DELETE" | "GET" | "PATCH" | "POST" | "PUT";
 
-type FetchArgs = {
+export type FetchArgs = {
   body?:
     | string
     | ArrayBuffer
@@ -26,24 +26,19 @@ type FetchArgs = {
 
 export type FetchResponseData = JSON | string | Blob;
 
-type FetchResponse = {
+export type FetchResponse = {
   data: FetchResponseData;
   response: Response;
 };
 
-type UseFetchArgs = {
+export type UseFetchArgs = {
   headers?: Headers;
   method?: HTTPMethod;
   url: string;
 };
 
 export default function useFetch({ headers, method, url }: UseFetchArgs): {
-  fetch: ({
-    body,
-    headers: newHeaders,
-    query,
-    url: newUrl,
-  }?: FetchArgs) => Promise<FetchResponse>;
+  fetch: ({ body, headers, query, url }?: FetchArgs) => Promise<FetchResponse>;
   data: FetchResponseData | null | undefined;
   error: Error | unknown;
   fetchStatus: FetchStatus;
