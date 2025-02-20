@@ -1,6 +1,6 @@
 import HTTPError from "../_types/HTTPError";
 import useFetch, { FetchStatus } from "./useFetch";
-import { describe, expect, it } from "@jest/globals";
+import { describe, expect, it, jest } from "@jest/globals";
 import { act, renderHook } from "@testing-library/react";
 
 const TEST_URL = "https://www.example.com/test/";
