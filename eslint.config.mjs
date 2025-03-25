@@ -33,7 +33,7 @@ const eslintConfig = [
   {
     // for jest test files
     // files: [
-    //   "**/*.test.{js,cjs,mjs,jsx,ts,tsx}",
+    //   "**/*.{spec,test}.{js,cjs,mjs,jsx,ts,tsx}",
     //   "**/__tests__/**/*.{js,cjs,mjs,jsx,ts,tsx}",
     // ],
     files: [

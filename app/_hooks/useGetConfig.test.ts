@@ -5,7 +5,12 @@ import { act, renderHook } from "@testing-library/react";
 
 const TEST_URL = "http://localhost:4000/";
 
-// mock a hook
+// Mock a hook
+/*
+xxx as jest.Mock works with global jest with @types/jest,
+but not with @jest/globals for some reason... so for now it is not
+explicitly imported above
+*/
 jest.mock("./useFetch");
 const mockUseFetch = useFetch as jest.Mock;
 
