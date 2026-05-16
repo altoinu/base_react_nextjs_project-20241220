@@ -4,15 +4,20 @@
   "description": "Sample basic React Next.js project setup with some dev dependencies",
   "private": true,
   "scripts": {
+    "clean": "run-p clean:coverage clean:modules",
+    "clean:coverage": "rm -rf coverage",
+    "clean:modules": "rm -rf node_modules",
+    "reinstall": "run-s clean reinstall:install",
+    "reinstall:install": "npm install",
+    "format": "(git diff --name-only HEAD; git ls-files --others --exclude-standard) | grep -E '\\.(md|css|js|cjs|mjs|jsx|ts|cts|mts|tsx)$' | xargs prettier --write",
+    "format:all": "prettier --write .",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write \"**/*.{md,css,js,cjs,mjs,jsx,ts,cts,mts,tsx}\"",
-    "lint:fix": "npm-run-all prettier lint",
+    "prepare": "husky",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "prepare": "husky install"
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",

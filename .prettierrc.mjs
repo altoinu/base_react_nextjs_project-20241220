@@ -6,7 +6,7 @@ const prettierConfig = {
   htmlWhitespaceSensitivity: "css",
   insertPragma: false,
   jsxSingleQuote: false,
-  printWidth: 80,
+  printWidth: 160,
   proseWrap: "preserve",
   quoteProps: "as-needed",
   requirePragma: false,
